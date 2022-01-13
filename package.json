@@ -1,0 +1,24 @@
+{
+  "name": "assignment-scraper",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.24.0",
+    "cheerio": "^1.0.0-rc.10",
+    "cors": "^2.8.5",
+    "express": "^4.17.2",
+    "express-basic-auth": "^1.2.1",
+    "express-json-validator-middleware": "^2.2.1",
+    "mariadb": "^2.5.5",
+    "sequelize": "^6.13.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
