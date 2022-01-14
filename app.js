@@ -120,7 +120,7 @@ app.post(
         }))
         try {
             await persistData(result)
-            response.send('OK')
+            response.json({ status: 'OK' })
             next()
         } catch (error) {
             next(error)
@@ -139,14 +139,14 @@ app.get(
                     ['id', 'DESC']
                 ],
                 limit: pageSize,
-                offset: pageIndex === 1 ? 0 : pageIndex*pageSize - 1
+                offset: (pageIndex - 1) * pageSize
             })
             response.json(result)
             next()
         } catch (error) {
             next(error)
         }
-        
+
     }
 )
 
@@ -168,14 +168,14 @@ app.get(
                     ['id', 'DESC']
                 ],
                 limit: pageSize,
-                offset: pageIndex === 1 ? 0 : pageIndex*pageSize - 1
+                offset: (pageIndex - 1) * pageSize
             })
             response.json(result)
             next()
         } catch (error) {
             next(error)
         }
-        
+
     }
 )
 
@@ -197,14 +197,14 @@ app.get(
                     ['id', 'DESC']
                 ],
                 limit: pageSize,
-                offset: pageIndex === 1 ? 0 : pageIndex*pageSize - 1
+                offset: (pageIndex - 1) * pageSize
             })
             response.json(result)
             next()
         } catch (error) {
             next(error)
         }
-        
+
     }
 )
 
