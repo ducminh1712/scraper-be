@@ -3,8 +3,10 @@ const axios = require('axios')
 const cherrio = require('cheerio')
 const { Validator, ValidationError } = require("express-json-validator-middleware")
 const { Sequelize } = require('sequelize')
-const basicAuth = require('./helper/basic-auth')
+const basicAuth = require('./middlewares/basic-auth')
 const cors = require('cors')
+const logger = require('./middlewares/logger')
+const errorHandler = require('./middlewares/error-handler')
 
 const { validate } = new Validator()
 const sequelize = new Sequelize('assignment', 'root', 'root', {
@@ -19,6 +21,7 @@ models.syncAll()
 app.use(cors());
 app.use(express.json());
 app.use(basicAuth)
+app.use(logger)
 
 const PORT = process.env.port || 3000
 
@@ -208,17 +211,7 @@ app.get(
     }
 )
 
-app.use((error, request, response, next) => {
-    // Check the error is a validation error
-    if (error instanceof ValidationError) {
-        // Handle the error
-        response.status(400).send(error.validationErrors)
-        next()
-    } else {
-        // Pass error on if not a validation error
-        next(error)
-    }
-});
+app.use(errorHandler)
 
 app.use('/', require('./controller/user.controller'))
 
